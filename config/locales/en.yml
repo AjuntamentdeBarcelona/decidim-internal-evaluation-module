@@ -9,6 +9,3 @@ en:
             values:
               'false': Not evaluated
               'true': Evaluated
-    components:
-      internal_evaluation:
-        name: InternalEvaluation
