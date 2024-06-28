@@ -10,13 +10,15 @@ module Decidim
       paths["lib/tasks"] = nil
 
       routes do
-        # Add admin engine routes here
-        # resources :internal_evaluation do
-        #   collection do
-        #     resources :exports, only: [:create]
-        #   end
-        # end
-        # root to: "internal_evaluation#index"
+        resources :proposals, only: [] do
+          resources :internal_evaluations, except: [:show, :destroy]
+        end
+      end
+
+      initializer "decidim_internal_evaluation.admin_mount_routes" do
+        Decidim::Proposals::AdminEngine.routes do
+          mount Decidim::InternalEvaluation::AdminEngine, at: "/", as: "decidim_admin_internal_evaluation"
+        end
       end
 
       initializer "decidim_internal_evaluation.filters" do
