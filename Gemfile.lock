@@ -3,6 +3,7 @@ PATH
   specs:
     decidim-internal_evaluation (0.28.1)
       decidim-core (>= 0.28.1)
+      decidim-proposals (>= 0.28.1)
 
 GEM
   remote: https://rubygems.org/
