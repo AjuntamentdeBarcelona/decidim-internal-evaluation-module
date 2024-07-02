@@ -37,6 +37,12 @@ module Decidim
         end
       end
 
+      initializer "decidim_internal_evaluation.proposals_admin_controller_additions" do
+        config.to_prepare do
+          Decidim::Proposals::Admin::ProposalsController.include(Decidim::InternalEvaluation::Admin::ProposalsControllerAdditions)
+        end
+      end
+
       def load_seed
         nil
       end
