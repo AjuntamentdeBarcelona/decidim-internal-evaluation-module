@@ -32,4 +32,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "decidim-core", Decidim::InternalEvaluation.decidim_version
   s.add_dependency "decidim-proposals", Decidim::InternalEvaluation.decidim_version
+  s.add_dependency "deface", "~> 1.9"
 end
