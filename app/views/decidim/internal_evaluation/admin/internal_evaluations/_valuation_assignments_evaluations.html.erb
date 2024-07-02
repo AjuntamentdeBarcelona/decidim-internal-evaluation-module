@@ -1,30 +1,36 @@
 <% internal_evaluation = valuation_assignment.proposal.internal_evaluations.find { |e| e.decidim_author_id == valuation_assignment.valuator_role.decidim_user_id } %>
+<% internal_evaluation = Decidim::InternalEvaluation::Admin::InternalEvaluationPresenter.new(internal_evaluation) if internal_evaluation.present? %>
 <% valuator = present(valuation_assignment.valuator) %>
 
-<div>
-  <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank) %>
-  <% if internal_evaluation.present? %>
-    <% internal_evaluation = Decidim::InternalEvaluation::Admin::InternalEvaluationPresenter.new(internal_evaluation) %>
-    <%= internal_evaluation.update_date %>
+<tr>
+  <td>
+    <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank) %>
+    <%= internal_evaluation.update_date if internal_evaluation.present? %>
+  </td>
 
-    <strong class="label <%= internal_evaluation.state_css_class %>" style="<%= internal_evaluation.state_css_style %>">
-      <%= internal_evaluation.state_title %>
+  <td>
+    <strong class="label <%= internal_evaluation&.state_css_class || "warning" %>" style="<%= internal_evaluation&.state_css_style %>">
+      <%= internal_evaluation&.state_title || "-" %>
     </strong>
+  </td>
 
-    <%= internal_evaluation.formatted_body %>
-  <% end %>
+  <td>
+    <%= internal_evaluation&.formatted_body || "-" %>
+  </td>
 
-  <% if valuator == current_user %>
-    <button class="button button__sm button__transparent-secondary mt-6 md:mt-12 md:self-start" data-dialog-open="evaluateModal">
-      <%= icon "pencil-line", class: "fill-current" %>
-    </button>
+  <td>
+    <% if valuator == current_user %>
+      <button class="button button__sm button__transparent-secondary mt-6 md:mt-12 md:self-start" data-dialog-open="evaluateModal">
+        <%= icon "pencil-line", class: "fill-current" %>
+      </button>
 
-    <%= decidim_modal id: "evaluateModal", class: "flag-modal" do %>
-      <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
+      <%= decidim_modal id: "evaluateModal", class: "flag-modal" do %>
+        <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
 
-      <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>
-        <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f %>
+        <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>
+          <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </td>
+</tr>
