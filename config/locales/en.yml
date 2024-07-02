@@ -20,6 +20,7 @@ en:
             title: Evaluation for %{title}
           index:
             actions: Actions
+            counter: "%{count} out of %{total} evaluations"
             evaluation: Evaluation
             status: Status
             title: Internal evaluations

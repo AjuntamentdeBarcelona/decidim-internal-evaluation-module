@@ -6,6 +6,8 @@
     </h2>
   </button>
 
+  <%= t(".counter", count: proposal.internal_evaluations.count, total: valuation_assignments.count ) %>
+
   <div id="panel-internal-evaluations">
     <table class="table-list">
       <thead>
