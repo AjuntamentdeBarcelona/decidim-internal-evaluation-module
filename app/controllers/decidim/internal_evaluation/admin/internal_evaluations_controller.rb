@@ -6,9 +6,7 @@ module Decidim
       # This controller allows admins to create internal evaluations on proposals in a participatory space.
       class InternalEvaluationsController < Admin::ApplicationController
         def create
-          # TODO: Pending to implement
-          # enforce_permission_to(:create, :internal_evaluation, proposal:)
-          # @form = form(InternalEvaluationForm).from_params(params)
+          enforce_permission_to(:create, :internal_evaluation, proposal:)
 
           @internal_evaluation_form = form(InternalEvaluationForm).from_params(params)
 
@@ -26,6 +24,8 @@ module Decidim
         end
 
         def update
+          enforce_permission_to(:create, :internal_evaluation, proposal:)
+
           @internal_evaluation_form = form(InternalEvaluationForm).from_params(params)
 
           UpdateInternalEvaluation.call(@internal_evaluation_form, internal_evaluation) do
@@ -42,6 +42,10 @@ module Decidim
         end
 
         private
+
+        def permission_class_chain
+          [Decidim::InternalEvaluation::Admin::Permissions] + super
+        end
 
         def skip_manage_component_permission
           true
