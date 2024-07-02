@@ -5,33 +5,41 @@ module Decidim
     module Admin
       # This controller allows admins to create internal evaluations on proposals in a participatory space.
       class InternalEvaluationsController < Admin::ApplicationController
-        helper_method :proposal
-
-        def index; end
-
-        def new; end
-
-        def edit; end
-
         def create
           # TODO: Pending to implement
           # enforce_permission_to(:create, :internal_evaluation, proposal:)
           # @form = form(InternalEvaluationForm).from_params(params)
 
-          # CreateInternalEvaluation.call(@form, proposal) do
-          #   on(:ok) do
-          #     flash[:notice] = I18n.t("internal_evaluations.create.success", scope: "decidim.internal_evaluation.admin")
-          #     redirect_to proposal_path(id: proposal.id)
-          #   end
+          @internal_evaluation_form = form(InternalEvaluationForm).from_params(params)
 
-          #   on(:invalid) do
-          #     flash.keep[:alert] = I18n.t("internal_evaluations.create.error", scope: "decidim.internal_evaluation.admin")
-          #     redirect_to proposal_path(id: proposal.id)
-          #   end
-          # end
+          CreateInternalEvaluation.call(@internal_evaluation_form) do
+            on(:ok) do
+              flash[:notice] = I18n.t("internal_evaluations.create.success", scope: "decidim.internal_evaluation.admin")
+              redirect_to decidim_proposals.proposal_path(id: proposal.id)
+            end
+
+            on(:invalid) do
+              flash.keep[:alert] = I18n.t("internal_evaluations.create.error", scope: "decidim.internal_evaluation.admin")
+              redirect_to decidim_proposals.proposal_path(id: proposal.id)
+            end
+          end
         end
 
-        def update; end
+        def update
+          @internal_evaluation_form = form(InternalEvaluationForm).from_params(params)
+
+          UpdateInternalEvaluation.call(@internal_evaluation_form, internal_evaluation) do
+            on(:ok) do
+              flash[:notice] = I18n.t("internal_evaluations.update.success", scope: "decidim.internal_evaluation.admin")
+              redirect_to decidim_proposals.proposal_path(id: proposal.id)
+            end
+
+            on(:invalid) do
+              flash.keep[:alert] = I18n.t("internal_evaluations.update.error", scope: "decidim.internal_evaluation.admin")
+              redirect_to decidim_proposals.proposal_path(id: proposal.id)
+            end
+          end
+        end
 
         private
 
@@ -39,8 +47,16 @@ module Decidim
           true
         end
 
+        def decidim_proposals
+          Decidim::EngineRouter.admin_proxy(proposal.component)
+        end
+
         def proposal
-          @proposal ||= Proposal.where(component: current_component).find(params[:proposal_id])
+          @proposal ||= Decidim::Proposals::Proposal.where(component: current_component).find(params[:proposal_id])
+        end
+
+        def internal_evaluation
+          @internal_evaluation ||= proposal.internal_evaluations.find(params[:id])
         end
       end
     end

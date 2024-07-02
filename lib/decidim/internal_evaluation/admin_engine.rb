@@ -9,15 +9,13 @@ module Decidim
       paths["db/migrate"] = nil
       paths["lib/tasks"] = nil
 
-      routes do
-        resources :proposals, only: [] do
-          resources :internal_evaluations, except: [:show, :destroy]
-        end
-      end
-
       initializer "decidim_internal_evaluation.admin_mount_routes" do
-        Decidim::Proposals::AdminEngine.routes do
-          mount Decidim::InternalEvaluation::AdminEngine, at: "/", as: "decidim_admin_internal_evaluation"
+        Decidim::Proposals::AdminEngine.class_eval do
+          routes do
+            resources :proposals, only: [] do
+              resources :internal_evaluations, only: [:create, :update], controller: "/decidim/internal_evaluation/admin/internal_evaluations"
+            end
+          end
         end
       end
 
