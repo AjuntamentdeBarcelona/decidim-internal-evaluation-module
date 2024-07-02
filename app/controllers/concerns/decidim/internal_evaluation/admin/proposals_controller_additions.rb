@@ -9,7 +9,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          helper_method :internal_evaluation_form
+          helper_method :internal_evaluation_form, :valuation_assignments
 
           def internal_evaluation_form
             @internal_evaluation_form ||= if current_user_evaluation.present?
@@ -17,6 +17,10 @@ module Decidim
                                           else
                                             form(Decidim::InternalEvaluation::Admin::InternalEvaluationForm).instance
                                           end
+          end
+
+          def valuation_assignments
+            @valuation_assignments ||= proposal.valuation_assignments.includes(:valuator_role, proposal: :internal_evaluations)
           end
 
           private
