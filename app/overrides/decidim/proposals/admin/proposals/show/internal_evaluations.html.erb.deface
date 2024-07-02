@@ -1,0 +1,4 @@
+<!-- insert_bottom "div.component__show_grid-item:first-of-type" -->
+<div class="card-section">
+  <%= render partial: "decidim/internal_evaluation/admin/internal_evaluations/index", locals: { proposal: proposal } %>
+</div>

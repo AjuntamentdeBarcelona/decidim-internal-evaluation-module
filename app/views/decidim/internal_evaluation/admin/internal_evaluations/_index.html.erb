@@ -1,0 +1,16 @@
+<div class="component__show_notes" data-component="accordion" id="accordion-internal-evaluations">
+  <button type="button" class="card-divider-button" data-controls="panel-internal-evaluations" data-open="true">
+    <%= icon "arrow-right-s-line" %>
+    <h2 class="card-title">
+      <%= t("title", scope: "decidim.internal_evaluation.admin.internal_evaluations.index") %>
+    </h2>
+  </button>
+
+  <div id="panel-internal-evaluations">
+    <%= render(
+          partial: "decidim/internal_evaluation/admin/internal_evaluations/valuation_assignments_evaluations",
+          collection: proposal.valuation_assignments.includes(:valuator_role, proposal: :internal_evaluations),
+          as: :valuation_assignment
+        ) %>
+  </div>
+</div>
