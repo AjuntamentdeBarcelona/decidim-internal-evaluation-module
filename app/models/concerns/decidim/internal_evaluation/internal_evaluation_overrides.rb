@@ -9,7 +9,7 @@ module Decidim
 
       class_methods do
         def ransack(params = {}, options = {})
-          return ProposalSearchWithInternalEvaluation.new(self, params, options.merge(current_user: options[:auth_object])) if options[:search_context] == :admin
+          return ProposalSearchWithInternalEvaluation.new(self, params.merge("current_user" => options[:auth_object]), options) if options[:search_context] == :admin
 
           ::Decidim::Proposals::ProposalSearch.new(self, params, options)
         end
