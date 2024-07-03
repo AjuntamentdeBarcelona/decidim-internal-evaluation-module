@@ -1,0 +1,2 @@
+<!-- replace_contents "td.valuators-count" -->
+<%= proposal.internal_evaluations.count %> / <%= proposal.valuation_assignments_count %>

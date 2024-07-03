@@ -9,6 +9,11 @@ en:
             values:
               'false': Not evaluated
               'true': Evaluated
+    proposals:
+      models:
+        proposal:
+          fields:
+            valuators: Evaluation status
     internal_evaluation:
       admin:
         internal_evaluations:
