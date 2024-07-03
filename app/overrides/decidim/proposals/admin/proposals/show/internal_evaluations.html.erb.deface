@@ -1,4 +1,4 @@
-<!-- insert_bottom "div.component__show_grid-item:first-of-type" -->
+<!-- insert_before "erb[silent]:contains('if allowed_to?(:create, :proposal_answer')" original 'd3edc16565bef67c40ceb5515109d7a2b2184a4a' -->
 <div class="card-section">
   <%= render partial: "decidim/internal_evaluation/admin/internal_evaluations/index", locals: { proposal: proposal } %>
 </div>
