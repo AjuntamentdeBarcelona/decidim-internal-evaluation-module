@@ -22,6 +22,10 @@ module Decidim
           Decidim::Proposals::ProposalState.where(component: current_component)
         end
 
+        def internal_state
+          super || states_tokens.first
+        end
+
         private
 
         def states_tokens
