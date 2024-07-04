@@ -23,6 +23,7 @@ en:
           form:
             save: Save
             title: Evaluation for %{title}
+            status: Status
           index:
             actions: Actions
             counter: "%{count} out of %{total} evaluations"

@@ -1,10 +1,14 @@
 <div data-dialog-container>
-  <div class="card" id="proposal-internal-evaluation">
-    <h2 data-dialog-title><%= t ".title", title: present(proposal).title %></h2>
+  <%= icon "upload-cloud-2-line" %>
+  <h2 data-dialog-title><%= t ".title", title: present(proposal).title %></h2>
 
-    <div class="row column flex items-center gap-x-4 my-2">
-      <%= form.collection_radio_buttons :internal_state, internal_evaluation_form.available_states, :token, ->(a) { translated_attribute(a.title) }, prompt: true do |builder|
-        builder.label { builder.radio_button + builder.text } end %>
+  <div id="proposal-internal-evaluation" class="space-y-4">
+    <div class="row column">
+      <%= form.label :internal_state, t(".status"), class: "font-semibold text-sm text-gray-2" %>
+      <div class="flex items-center gap-x-4 my-2">
+        <%= form.collection_radio_buttons :internal_state, internal_evaluation_form.available_states, :token, ->(a) { translated_attribute(a.title) }, prompt: true do |builder|
+          builder.label { builder.radio_button + builder.text } end %>
+      </div>
     </div>
 
     <div class="row column">

@@ -4,7 +4,7 @@
 
 <tr>
   <td>
-    <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank) %>
+    <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank, class: "block") %>
     <%= internal_evaluation.update_date if internal_evaluation.present? %>
   </td>
 
@@ -20,11 +20,11 @@
 
   <td>
     <% if valuator == current_user %>
-      <button class="button button__sm button__transparent-secondary mt-6 md:mt-12 md:self-start" data-dialog-open="evaluateModal">
-        <%= icon "pencil-line", class: "fill-current" %>
+      <button class="button button__sm button__text-secondary" data-dialog-open="evaluateModal">
+        <%= icon "pencil-line" %>
       </button>
 
-      <%= decidim_modal id: "evaluateModal", class: "flag-modal" do %>
+      <%= decidim_modal id: "evaluateModal", class: "evaluate-modal" do %>
         <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
 
         <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>

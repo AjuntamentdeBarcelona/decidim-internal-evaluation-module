@@ -6,17 +6,19 @@
     </h2>
   </button>
 
-  <%= t(".counter", count: internal_evaluations.count, total: valuation_assignments.count ) %>
-
   <div id="panel-internal-evaluations">
-    <table class="table-list">
+    <span class="block my-4 font-semibold text-gray-2"><%= t(".counter", count: proposal.internal_evaluations.count, total: valuation_assignments.count ) %></span>
+
+    <table class="table-list table-list--internal-evaluation">
       <thead>
         <tr>
           <th>
-            <%= sort_link(internal_evaluations_query, :updated_at, t(".updated") ) %>
+            <%# TODO: Add sort_links %>
+            <%= t(".updated") %>
           </th>
           <th>
-            <%= sort_link(internal_evaluations_query, :state, t(".status") ) %>
+            <%# TODO: Add sort_links %>
+            <%= t(".status") %>
           </th>
           <th>
             <%= t(".evaluation") %>
@@ -29,7 +31,7 @@
       <tbody>
         <%= render(
               partial: "decidim/internal_evaluation/admin/internal_evaluations/valuation_assignments_evaluations",
-              collection: reordered_valuation_assignments,
+              collection: valuation_assignments,
               as: :valuation_assignment
             ) %>
       </tbody>
