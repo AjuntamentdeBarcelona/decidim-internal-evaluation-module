@@ -9,11 +9,6 @@ en:
             values:
               'false': Not evaluated
               'true': Evaluated
-    proposals:
-      models:
-        proposal:
-          fields:
-            valuators: Evaluation status
     internal_evaluation:
       admin:
         internal_evaluations:
@@ -22,8 +17,8 @@ en:
             success: Internal evaluation successfully created.
           form:
             save: Save
-            title: Evaluation for %{title}
             status: Status
+            title: Evaluation for %{title}
           index:
             actions: Actions
             counter: "%{count} out of %{total} evaluations"
@@ -34,3 +29,8 @@ en:
           update:
             error: 'There was a problem updating the internal evaluation: %{message}'
             success: Internal evaluation successfully updated.
+    proposals:
+      models:
+        proposal:
+          fields:
+            valuators: Evaluation status
