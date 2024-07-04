@@ -17,7 +17,11 @@ module Decidim
             end
 
             on(:invalid) do
-              flash.keep[:alert] = I18n.t("internal_evaluations.create.error", scope: "decidim.internal_evaluation.admin")
+              flash.keep[:alert] = I18n.t(
+                "internal_evaluations.create.error",
+                scope: "decidim.internal_evaluation.admin",
+                message: @form.errors.full_messages.join(", ")
+              )
               redirect_to decidim_proposals.proposal_path(id: proposal.id)
             end
           end
@@ -35,7 +39,11 @@ module Decidim
             end
 
             on(:invalid) do
-              flash.keep[:alert] = I18n.t("internal_evaluations.update.error", scope: "decidim.internal_evaluation.admin")
+              flash.keep[:alert] = I18n.t(
+                "internal_evaluations.update.error",
+                scope: "decidim.internal_evaluation.admin",
+                message: @form.errors.full_messages.join(", ")
+              )
               redirect_to decidim_proposals.proposal_path(id: proposal.id)
             end
           end

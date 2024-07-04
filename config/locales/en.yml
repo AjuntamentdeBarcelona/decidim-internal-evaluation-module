@@ -18,7 +18,7 @@ en:
       admin:
         internal_evaluations:
           create:
-            error: There was a problem creating the internal evaluation.
+            error: 'There was a problem creating the internal evaluation: %{message}'
             success: Internal evaluation successfully created.
           form:
             save: Save
@@ -32,5 +32,5 @@ en:
             title: Internal evaluations
             updated: Updated
           update:
-            error: There was a problem updating the internal evaluation.
+            error: 'There was a problem updating the internal evaluation: %{message}'
             success: Internal evaluation successfully updated.
