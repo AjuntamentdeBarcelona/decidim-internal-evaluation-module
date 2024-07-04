@@ -6,7 +6,6 @@ module Decidim
       # A form object to be used when valuator users want to evaluate a proposal.
       class InternalEvaluationForm < Decidim::Form
         include TranslatableAttributes
-        mimic :movidita
 
         translatable_attribute :body, String
         attribute :internal_state, String
