@@ -3,7 +3,15 @@
   @apply w-full;
 
   td:nth-child(3), th:nth-child(3) {
-    @apply text-left w-2/3;
+    @apply text-left;
+  }
+
+  td:nth-child(4) > * {
+    @apply inline-block [&+*]:ml-1;
+  }
+
+  svg {
+    @apply w-5 h-5;
   }
 }
 

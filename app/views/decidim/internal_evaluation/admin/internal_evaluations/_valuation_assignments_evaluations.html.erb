@@ -14,12 +14,12 @@
     </strong>
   </td>
 
-  <td>
+  <td colspan="2">
     <%= internal_evaluation&.formatted_body || "-" %>
   </td>
 
   <td>
-    <% if valuator == current_user %>
+    <% if true || valuator == current_user %>
       <button class="button button__sm button__text-secondary" data-dialog-open="evaluateModal">
         <%= icon "pencil-line" %>
       </button>

@@ -1,4 +1,4 @@
-<div class="component__show_notes" data-component="accordion" id="accordion-internal-evaluations">
+<div data-component="accordion" id="accordion-internal-evaluations">
   <button type="button" class="card-divider-button" data-controls="panel-internal-evaluations" data-open="true">
     <%= icon "arrow-right-s-line" %>
     <h2 class="card-title">
@@ -9,7 +9,15 @@
   <div id="panel-internal-evaluations">
     <span class="block my-4 font-semibold text-gray-2"><%= t(".counter", count: proposal.internal_evaluations.count, total: valuation_assignments.count ) %></span>
 
-    <table class="table-list table-list--internal-evaluation">
+    <table class="table-list table-fixed table-list--internal-evaluation">
+      <colgroup>
+        <col class="min-w-[20%] max-w-[30%]"/>
+        <col class="w-[10%]" />
+        <col class="max-w-[50%]"/>
+        <col /> <%# this allow 3rd column to grow, requires table-fixed %>
+        <col class="w-[10%]" />
+      </colgroup>
+
       <thead>
         <tr>
           <th>
@@ -20,7 +28,7 @@
             <%# TODO: Add sort_links %>
             <%= t(".status") %>
           </th>
-          <th>
+          <th colspan="2">
             <%= t(".evaluation") %>
           </th>
           <th>
