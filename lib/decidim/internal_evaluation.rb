@@ -3,6 +3,7 @@
 require "decidim/internal_evaluation/admin"
 require "decidim/internal_evaluation/engine"
 require "decidim/internal_evaluation/admin_engine"
+require "decidim/internal_evaluation/proposals_component"
 
 module Decidim
   # This namespace holds the logic of the `InternalEvaluation` component. This component
