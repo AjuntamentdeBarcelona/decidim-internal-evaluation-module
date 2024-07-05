@@ -10,6 +10,9 @@ en:
               'false': Not evaluated
               'true': Evaluated
     proposals:
+      admin:
+        exports:
+          internal_evaluations: Internal evaluations
       models:
         proposal:
           fields:
