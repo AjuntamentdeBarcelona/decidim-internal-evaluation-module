@@ -20,7 +20,7 @@
 
   <td class="table-list__actions">
     <% if valuator == current_user %>
-      <%= with_tooltip("jajaja", class: "top") do %>
+      <%= with_tooltip(t(".edit_evaluation"), class: "top") do %>
         <button class="text-secondary" data-dialog-open="evaluateModal">
           <%= icon "pencil-line" %>
         </button>
