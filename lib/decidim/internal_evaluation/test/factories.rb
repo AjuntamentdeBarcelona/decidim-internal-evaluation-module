@@ -1,7 +1,16 @@
 # frozen_string_literal: true
 
 require "decidim/core/test/factories"
+require "decidim/proposals/test/factories"
 
 FactoryBot.define do
-  # Add engine factories here
+  factory :internal_evaluation, class: "Decidim::InternalEvaluation::InternalEvaluation" do
+    transient do
+      skip_injection { false }
+    end
+
+    proposal
+    author { build(:user, organization: proposal.organization, skip_injection:) }
+    internal_state { create(:proposal_state, component: proposal.component, skip_injection:) }
+  end
 end
