@@ -18,11 +18,13 @@
     <%= internal_evaluation&.formatted_body || "-" %>
   </td>
 
-  <td>
+  <td class="table-list__actions">
     <% if valuator == current_user %>
-      <button class="button button__sm button__text-secondary" data-dialog-open="evaluateModal">
-        <%= icon "pencil-line" %>
-      </button>
+      <%= with_tooltip("jajaja", class: "top") do %>
+        <button class="text-secondary" data-dialog-open="evaluateModal">
+          <%= icon "pencil-line" %>
+        </button>
+      <% end %>
 
       <%= decidim_modal id: "evaluateModal", class: "evaluate-modal" do %>
         <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
