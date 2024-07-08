@@ -21,12 +21,12 @@
   <td class="table-list__actions">
     <% if valuator == current_user %>
       <%= with_tooltip(t(".edit_evaluation"), class: "top") do %>
-        <button class="text-secondary" data-dialog-open="evaluateModal">
+        <button class="text-secondary" data-dialog-open="<%= "evaluateModal-#{valuation_assignment.id}" %>">
           <%= icon "pencil-line" %>
         </button>
       <% end %>
 
-      <%= decidim_modal id: "evaluateModal", class: "evaluate-modal" do %>
+      <%= decidim_modal id: "evaluateModal-#{valuation_assignment.id}", class: "evaluate-modal" do %>
         <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
 
         <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>
@@ -41,7 +41,7 @@
             valuation_assignment_path(proposal_ids: [proposal.id], valuator_role_ids: [valuation_assignment.valuator_role.id]),
             t("remove_assignment", scope: "decidim.proposals.admin.proposals.show"),
             method: :delete,
-            data: { confirm: t("remove_assignment_confirmation", scope: "decidim.proposals.admin.proposals.show") },
+            data: { confirm: t("remove_assignment_confirmation", scope: "decidim.proposals.admin.proposals.show"), action: "unassign-valuator" },
             class: "red-icon"
           ) %>
     <% end %>
