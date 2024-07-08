@@ -13,12 +13,10 @@
       <thead>
         <tr>
           <th>
-            <%# TODO: Add sort_links %>
-            <%= t(".updated") %>
+            <%= sort_link(internal_evaluations_query, :updated_at, t(".updated") ) %>
           </th>
           <th>
-            <%# TODO: Add sort_links %>
-            <%= t(".status") %>
+            <%= sort_link(internal_evaluations_query, :state, t(".status") ) %>
           </th>
           <th colspan="2">
             <%= t(".evaluation") %>
@@ -31,7 +29,7 @@
       <tbody>
         <%= render(
               partial: "decidim/internal_evaluation/admin/internal_evaluations/valuation_assignments_evaluations",
-              collection: valuation_assignments,
+              collection: reordered_valuation_assignments,
               as: :valuation_assignment
             ) %>
       </tbody>
