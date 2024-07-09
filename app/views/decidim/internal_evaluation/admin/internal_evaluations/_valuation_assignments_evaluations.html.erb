@@ -21,7 +21,7 @@
   <td class="table-list__actions">
     <% if valuator == current_user %>
       <%= with_tooltip(t(".edit_evaluation"), class: "top") do %>
-        <button class="text-secondary" data-dialog-open="<%= "evaluateModal-#{valuation_assignment.id}" %>">
+        <button class="text-secondary" data-dialog-open="<%= "evaluateModal-#{valuation_assignment.id}" %>" data-action="evaluate">
           <%= icon "pencil-line" %>
         </button>
       <% end %>
