@@ -99,6 +99,13 @@ describe "Valuator manages internal evaluations" do
       end
     end
 
+    it "shows the evaluation status and content" do
+      within "tr", text: user.name do
+        expect(page).to have_content(translated(evaluation.internal_state.title))
+        expect(page).to have_content(translated(evaluation.body))
+      end
+    end
+
     it "can edit owned internal evaluations" do
       within "tr", text: another_user.name do
         expect(page).to have_no_css("[data-action='evaluate']")
