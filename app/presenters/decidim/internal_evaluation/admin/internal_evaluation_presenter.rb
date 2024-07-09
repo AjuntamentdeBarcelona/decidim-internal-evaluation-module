@@ -16,6 +16,8 @@ module Decidim
         end
 
         def formatted_body
+          return "" if body.blank?
+
           default_body = decidim_sanitize_editor_admin(translated_attribute(body))
 
           return default_body if decidim_sanitize(default_body, strip_tags: true).present?
