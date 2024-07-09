@@ -12,5 +12,6 @@ FactoryBot.define do
     proposal
     author { build(:user, organization: proposal.organization, skip_injection:) }
     internal_state { create(:proposal_state, component: proposal.component, skip_injection:) }
+    body { generate_localized_description(:internal_evaluation_body, skip_injection:) }
   end
 end
