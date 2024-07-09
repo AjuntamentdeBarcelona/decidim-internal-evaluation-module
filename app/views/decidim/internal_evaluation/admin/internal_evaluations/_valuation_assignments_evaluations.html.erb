@@ -30,7 +30,7 @@
         <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
 
         <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>
-          <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f %>
+          <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f, locals: { modal_id: "evaluateModal-#{valuation_assignment.id}" } %>
         <% end %>
       <% end %>
     <% end %>
