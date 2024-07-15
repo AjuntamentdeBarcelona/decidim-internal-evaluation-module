@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "decidim/internal_evaluation/admin"
+require "decidim/internal_evaluation/admin/unassign_proposals_from_valuators_overrides"
 require "decidim/internal_evaluation/engine"
 require "decidim/internal_evaluation/admin_engine"
 

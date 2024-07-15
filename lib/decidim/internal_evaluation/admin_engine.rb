@@ -49,6 +49,12 @@ module Decidim
         end
       end
 
+      initializer "decidim_internal_evaluation.unassign_proposals_from_valuators_overrides" do
+        config.to_prepare do
+          Decidim::Proposals::Admin::UnassignProposalsFromValuator.include(Decidim::InternalEvaluation::Admin::UnassignProposalsFromValuatorsOverrides)
+        end
+      end
+
       def load_seed
         nil
       end
