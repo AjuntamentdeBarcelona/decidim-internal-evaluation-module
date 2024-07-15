@@ -7,11 +7,11 @@ module Decidim
       class InternalEvaluationForm < Decidim::Form
         include TranslatableAttributes
 
-        translatable_attribute :body, String
+        attribute :body, String
         attribute :internal_state, String
 
         validates :internal_state, presence: true, inclusion: { in: :states_tokens }
-        validates :body, translatable_presence: true
+        validates :body, presence: true
 
         def map_model(model)
           self.internal_state = model.internal_state.token

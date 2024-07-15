@@ -18,15 +18,7 @@ module Decidim
         def formatted_body
           return "" if body.blank?
 
-          default_body = decidim_sanitize_editor_admin(translated_attribute(body))
-
-          return default_body if decidim_sanitize(default_body, strip_tags: true).present?
-
-          alternative_body = body.except(I18n.locale.to_s).values.map { |value| decidim_sanitize(value, strip_tags: true) }.find(&:presence)
-
-          return "" if alternative_body.blank?
-
-          decidim_sanitize_editor_admin(translated_attribute(alternative_body))
+          decidim_sanitize_editor_admin(body)
         end
 
         def state_css_class
