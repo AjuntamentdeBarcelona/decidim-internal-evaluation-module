@@ -12,7 +12,7 @@ module Decidim
       let(:internal_evaluation) { create(:internal_evaluation, body:, internal_state:, proposal:) }
       let(:proposal) { create(:proposal, title: proposal_title, body: proposal_body) }
       let(:internal_state) { create(:proposal_state, component: proposal.component, title: state_title) }
-      let(:body) { { en: "The body", es: "El cuerpo" } }
+      let(:body) { "The body" }
       let(:state_title) { { en: "Accepted", es: "Aceptado" } }
       let(:proposal_title) { { en: "The title", es: "El título" } }
       let(:proposal_body) { { en: "The body", es: "El cuerpo" } }

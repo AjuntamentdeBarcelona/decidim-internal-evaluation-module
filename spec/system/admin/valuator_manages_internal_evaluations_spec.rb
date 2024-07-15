@@ -53,7 +53,7 @@ describe "Valuator manages internal evaluations" do
           end
         end.not_to change(Decidim::InternalEvaluation::InternalEvaluation, :count)
 
-        expect(page).to have_content("Body en cannot be blank")
+        expect(page).to have_content("Body cannot be blank")
       end
 
       it "can only create an internal evaluation for themselves" do
@@ -70,13 +70,7 @@ describe "Valuator manages internal evaluations" do
         expect do
           within "div.evaluate-modal" do
             choose "Accepted"
-            fill_in_i18n_editor(
-              :internal_evaluation_body,
-              "#internal_evaluation-body-tabs",
-              "es" => "Gran propuesta",
-              "en" => "Great proposal",
-              "ca" => "Gran proposta"
-            )
+            fill_in_editor :internal_evaluation_body, with: "Great proposal"
 
             click_on "Save"
           end
@@ -89,7 +83,7 @@ describe "Valuator manages internal evaluations" do
   end
 
   context "when evaluation already exists" do
-    let!(:evaluation) { create(:internal_evaluation, proposal: assigned_proposal, author: user) }
+    let!(:evaluation) { create(:internal_evaluation, proposal: assigned_proposal, author: user, body: "Great proposal!") }
 
     before do
       visit current_path
@@ -102,7 +96,7 @@ describe "Valuator manages internal evaluations" do
     it "shows the evaluation status and content" do
       within "tr", text: user.name do
         expect(page).to have_content(translated(evaluation.internal_state.title))
-        expect(page).to have_content(translated(evaluation.body))
+        expect(page).to have_content(evaluation.body)
       end
     end
 
@@ -121,13 +115,7 @@ describe "Valuator manages internal evaluations" do
         within "div.evaluate-modal" do
           expect(page).to have_checked_field(translated(evaluation.internal_state.title))
           choose "Accepted"
-          fill_in_i18n_editor(
-            :internal_evaluation_body,
-            "#internal_evaluation-body-tabs",
-            "es" => "Cambio",
-            "en" => "Change",
-            "ca" => "Canvi"
-          )
+          fill_in_editor :internal_evaluation_body, with: "Change"
 
           click_on "Save"
         end
@@ -137,7 +125,7 @@ describe "Valuator manages internal evaluations" do
       evaluation.reload
 
       expect(evaluation.internal_state.token).to eq("accepted")
-      expect(translated(evaluation.body)).to eq("<p>Change</p>")
+      expect(evaluation.body).to eq("<p>Change</p>")
     end
   end
 end
