@@ -3,7 +3,7 @@
 <% valuator = present(valuation_assignment.valuator) %>
 
 <tr>
-  <td>
+  <td colspan="2">
     <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank, class: "block") %>
     <%= internal_evaluation.update_date if internal_evaluation.present? %>
   </td>
@@ -14,7 +14,7 @@
     </strong>
   </td>
 
-  <td colspan="2">
+  <td colspan="6">
     <%= internal_evaluation&.formatted_body || "-" %>
   </td>
 
