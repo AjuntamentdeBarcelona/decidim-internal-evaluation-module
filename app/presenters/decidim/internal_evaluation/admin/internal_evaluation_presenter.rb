@@ -30,6 +30,8 @@ module Decidim
         end
 
         def state_title
+          return if internal_state.blank?
+
           translated_attribute(internal_state.title)
         end
 

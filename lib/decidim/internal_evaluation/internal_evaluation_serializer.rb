@@ -13,7 +13,7 @@ module Decidim
         {
           id: resource.id,
           created_at: resource.created_at,
-          status: translated_attribute(resource.internal_state.title),
+          status: translated_attribute(resource.internal_state&.title),
           text: convert_to_text(resource.body),
           evaluator_name: resource.author.name,
           proposal_title: translated_attribute(proposal.title),

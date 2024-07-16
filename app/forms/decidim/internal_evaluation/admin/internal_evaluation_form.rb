@@ -14,7 +14,7 @@ module Decidim
         validates :body, presence: true
 
         def map_model(model)
-          self.internal_state = model.internal_state.token
+          self.internal_state = model.internal_state&.token
         end
 
         def available_states
