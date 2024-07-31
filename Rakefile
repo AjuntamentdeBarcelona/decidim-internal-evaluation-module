@@ -24,5 +24,5 @@ end
 desc "Generates a development app."
 task development_app: "decidim:generate_external_development_app" do
   ENV["RAILS_ENV"] = "development"
-  install_module("spec/decidim_dummy_app")
+  install_module("development_app")
 end
