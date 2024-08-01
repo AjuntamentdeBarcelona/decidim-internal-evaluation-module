@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "deface"
+
 module Decidim
   module InternalEvaluation
     # This is the engine that runs on the public interface of `InternalEvaluation`.
@@ -9,14 +11,14 @@ module Decidim
       paths["db/migrate"] = nil
       paths["lib/tasks"] = nil
 
-      routes do
-        # Add admin engine routes here
-        # resources :internal_evaluation do
-        #   collection do
-        #     resources :exports, only: [:create]
-        #   end
-        # end
-        # root to: "internal_evaluation#index"
+      initializer "decidim_internal_evaluation.admin_mount_routes" do
+        Decidim::Proposals::AdminEngine.class_eval do
+          routes do
+            resources :proposals, only: [] do
+              resources :internal_evaluations, only: [:create, :update], controller: "/decidim/internal_evaluation/admin/internal_evaluations"
+            end
+          end
+        end
       end
 
       initializer "decidim_internal_evaluation.filters" do
@@ -32,6 +34,24 @@ module Decidim
             filter.add_filters(:evaluated_by_user)
             filter.add_filters_with_values(evaluated_by_user: %w(true false))
           end
+        end
+      end
+
+      initializer "decidim_internal_evaluation.proposals_admin_controller_additions" do
+        config.to_prepare do
+          Decidim::Proposals::Admin::ProposalsController.include(Decidim::InternalEvaluation::Admin::ProposalsControllerAdditions)
+        end
+      end
+
+      initializer "decidim_internal_evaluation.proposal_states_admin_controller_additions" do
+        config.to_prepare do
+          Decidim::Proposals::Admin::ProposalStatesController.include(Decidim::InternalEvaluation::Admin::ProposalStatesControllerAdditions)
+        end
+      end
+
+      initializer "decidim_internal_evaluation.unassign_proposals_from_valuators_overrides" do
+        config.to_prepare do
+          Decidim::Proposals::Admin::UnassignProposalsFromValuator.include(Decidim::InternalEvaluation::Admin::UnassignProposalsFromValuatorsOverrides)
         end
       end
 

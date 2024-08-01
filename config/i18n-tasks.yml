@@ -4,7 +4,11 @@ base_locale: en
 locales: [en]
 
 ignore_unused:
-  - "decidim.components.internal_evaluation.name"
+  - decidim.admin.filters.proposals.evaluated_by_user.*
+  - decidim.proposals.models.proposal.fields.valuators
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  - decidim.proposals.admin.proposals.show.remove_assignment
+  - decidim.proposals.admin.proposals.show.remove_assignment_confirmation
+  - decidim.shared.confirm_modal.cancel

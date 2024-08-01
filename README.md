@@ -4,8 +4,7 @@ Tools to manage in an easier way the internal evaluation process of proposals.
 
 ## Usage
 
-InternalEvaluation will be available as a Component for a Participatory
-Space.
+This module adds the internal evaluation feature to proposals components.
 
 ## Installation
 

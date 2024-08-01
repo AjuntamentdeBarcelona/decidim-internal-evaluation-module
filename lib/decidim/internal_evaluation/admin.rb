@@ -3,7 +3,7 @@
 module Decidim
   module InternalEvaluation
     # This module contains all the domain logic associated to Decidim's InternalEvaluation
-    # component admin panel.
+    # admin panel.
     module Admin
     end
   end

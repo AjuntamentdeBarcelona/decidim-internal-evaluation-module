@@ -1,1 +1,22 @@
 /* css for decidim_internal_evaluation */
+.table-list--internal-evaluation {
+  @apply w-full;
+
+  td:nth-child(3), th:nth-child(3) {
+    @apply text-left;
+  }
+
+  svg {
+    @apply w-5 h-5;
+  }
+}
+
+.evaluate-modal {
+  label {
+    @apply font-semibold text-sm text-gray-2;
+  }
+
+  .label--tabs + * {
+    @apply mt-2;
+  }
+}

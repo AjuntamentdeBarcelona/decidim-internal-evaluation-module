@@ -7,8 +7,36 @@ en:
           evaluated_by_user:
             label: Evaluation
             values:
-              'false': Not evaluated
-              'true': Evaluated
-    components:
-      internal_evaluation:
-        name: InternalEvaluation
+              "false": Not evaluated
+              "true": Evaluated
+    internal_evaluation:
+      admin:
+        internal_evaluations:
+          create:
+            error: "There was a problem creating the internal evaluation: %{message}"
+            success: Internal evaluation successfully created.
+          form:
+            save: Save
+            status: Status
+            title: Evaluation for %{title}
+          index:
+            actions: Actions
+            counter: "%{count} out of %{total} evaluations"
+            edit_evaluation: Edit evaluation
+            evaluation: Evaluation
+            status: Status
+            title: Internal evaluations
+            updated: Updated
+          update:
+            error: "There was a problem updating the internal evaluation: %{message}"
+            success: Internal evaluation successfully updated.
+          valuation_assignments_evaluations:
+            edit_evaluation: Edit evaluation
+    proposals:
+      admin:
+        exports:
+          internal_evaluations: Internal evaluations
+      models:
+        proposal:
+          fields:
+            valuators: Evaluation status

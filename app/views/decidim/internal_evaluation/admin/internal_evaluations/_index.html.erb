@@ -1,0 +1,40 @@
+<div data-component="accordion" id="accordion-internal-evaluations">
+  <button type="button" class="card-divider-button" data-controls="panel-internal-evaluations" data-open="true">
+    <%= icon "arrow-right-s-line" %>
+    <h2 class="card-title">
+      <%= t("title", scope: "decidim.internal_evaluation.admin.internal_evaluations.index") %>
+    </h2>
+  </button>
+
+  <div id="panel-internal-evaluations">
+    <span class="block my-4 font-semibold text-gray-2"><%= t(".counter", count: proposal.internal_evaluations.count, total: valuation_assignments.count ) %></span>
+
+    <div class="table-scroll">
+      <table class="table-list table-fixed table-list--internal-evaluation">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <%= sort_link(internal_evaluations_query, :updated_at, t(".updated") ) %>
+            </th>
+            <th>
+              <%= sort_link(internal_evaluations_query, :state, t(".status") ) %>
+            </th>
+            <th colspan="6">
+              <%= t(".evaluation") %>
+            </th>
+            <th>
+              <%= t(".actions") %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render(
+            partial: "decidim/internal_evaluation/admin/internal_evaluations/valuation_assignments_evaluations",
+            collection: reordered_valuation_assignments,
+            as: :valuation_assignment
+          ) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

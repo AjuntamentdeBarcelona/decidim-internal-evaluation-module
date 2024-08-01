@@ -1,14 +1,23 @@
 # frozen_string_literal: true
 
-require "decidim/components/namer"
 require "decidim/core/test/factories"
+require "decidim/proposals/test/factories"
 
 FactoryBot.define do
-  factory :internal_evaluation_component, parent: :component do
-    name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :internal_evaluation).i18n_name }
-    manifest_name { :internal_evaluation }
-    participatory_space { association(:participatory_process, :with_steps) }
-  end
+  factory :internal_evaluation, class: "Decidim::InternalEvaluation::InternalEvaluation" do
+    transient do
+      skip_injection { false }
+    end
 
-  # Add engine factories here
+    proposal
+    author { build(:user, organization: proposal.organization, skip_injection:) }
+    internal_state { create(:proposal_state, component: proposal.component, skip_injection:) }
+    body do
+      if skip_injection
+        generate(:title)
+      else
+        "<script>alert(\"internal_evaluation_body\");</script> #{generate(:title)}"
+      end
+    end
+  end
 end

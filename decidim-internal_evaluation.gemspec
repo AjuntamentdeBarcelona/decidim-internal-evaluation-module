@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = "~> 3.1"
+  s.required_ruby_version = "~> 3.2"
 
   s.name = "decidim-internal_evaluation"
   s.summary = "A decidim internal_evaluation module"
@@ -30,5 +30,8 @@ Gem::Specification.new do |s|
     end
   end
 
-  s.add_dependency "decidim-core", Decidim::InternalEvaluation.decidim_version
+  s.add_dependency "decidim-core", "0.29.0.rc4"
+  s.add_dependency "decidim-proposals", "0.29.0.rc4"
+  s.add_dependency "decidim-templates", "0.29.0.rc4"
+  s.add_dependency "deface", "~> 1.9"
 end
