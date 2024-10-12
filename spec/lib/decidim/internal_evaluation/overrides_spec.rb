@@ -9,7 +9,7 @@ checksums = [
     package: "decidim-proposals",
     files: {
       "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "057ee4242479109023a5904c8de55222",
-      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "5dae5c5dc6b6c25a5b4cfc5cda5e9f01"
+      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "13b14adb8f37950b9902cf03b6015095"
     }
   }
 ]
