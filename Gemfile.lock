@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/tremend-cofe/decidim.git
-  revision: 3a1a4b24453ea0fb966aa09421283256166852c6
-  ref: 3a1a4b2445
+  revision: 334f82dfa415e3d209afeaea43792518aa062fee
+  ref: 334f82dfa4
   branch: bcn/0.28-branch
   specs:
     decidim (0.28.4)

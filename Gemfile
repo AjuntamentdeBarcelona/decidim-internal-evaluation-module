@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/tremend-cofe/decidim.git", branch: "bcn/0.28-branch", ref: "3a1a4b2445" }
+DECIDIM_VERSION = { git: "https://github.com/tremend-cofe/decidim.git", branch: "bcn/0.28-branch", ref: "334f82dfa4" }
 
 gem "decidim-internal_evaluation", path: "."
 gem "decidim", DECIDIM_VERSION
