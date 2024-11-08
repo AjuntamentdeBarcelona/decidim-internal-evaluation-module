@@ -10,12 +10,14 @@ module Decidim
       end
 
       let(:internal_evaluation) { create(:internal_evaluation, body:, internal_state:, proposal:) }
-      let(:proposal) { create(:proposal, title: proposal_title, body: proposal_body) }
+      let(:proposal) { create(:proposal, title: proposal_title, body: proposal_body, scope:, category:) }
       let(:internal_state) { create(:proposal_state, component: proposal.component, title: state_title) }
       let(:body) { "The body" }
       let(:state_title) { { en: "Accepted", es: "Aceptado" } }
       let(:proposal_title) { { en: "The title", es: "El título" } }
       let(:proposal_body) { { en: "The body", es: "El cuerpo" } }
+      let(:scope) { create(:scope, name: { en: "Scope", es: "Alcance" }) }
+      let(:category) { create(:category, name: { en: "Category", es: "Categoría" }) }
 
       describe "#serialize" do
         let(:serialized) { subject.serialize }
@@ -28,6 +30,8 @@ module Decidim
           expect(serialized).to include(evaluator_name: internal_evaluation.author.name)
           expect(serialized).to include(proposal_title: "The title")
           expect(serialized).to include(proposal_description: "The body")
+          expect(serialized).to include(scope: "Scope")
+          expect(serialized).to include(category: "Category")
         end
       end
     end
