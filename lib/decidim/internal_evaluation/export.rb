@@ -12,11 +12,15 @@ module Decidim
       #
       # Returns an Arel::Relation with all the internal evaluations for that component and resource.
       def internal_evaluations_for_resource(resource_class, component, user)
-        filtered_collection(resource_class, component, user).map do |resource|
-          resource.valuation_assignments.map do |assignment|
-            InternalEvaluation.find_or_initialize_by(proposal: resource, author: assignment.valuator)
+        filtered_collection(resource_class, component, user).map do |proposal|
+          proposal.valuation_assignments.map do |assignment|
+            author = assignment.valuator_role&.user
+
+            next if author.blank?
+
+            InternalEvaluation.find_or_initialize_by(proposal:, author:)
           end
-        end.flatten
+        end.flatten.compact
       end
 
       # Internal: Returns the filtered collection for the given resource class, component and user.
