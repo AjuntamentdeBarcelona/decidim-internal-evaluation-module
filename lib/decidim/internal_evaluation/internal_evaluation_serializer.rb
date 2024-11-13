@@ -16,6 +16,7 @@ module Decidim
           status: resource.internal_state.present? ? translated_attribute(resource.internal_state.title) : "",
           text: resource.body.present? ? convert_to_text(resource.body) : "",
           evaluator_name: resource.author.name || "",
+          proposal_id: proposal.id || "",
           proposal_title: translated_attribute(proposal.title) || "",
           proposal_description: convert_to_text(translated_attribute(proposal.body)) || "",
           scope: translated_attribute(proposal.scope&.name) || "",
