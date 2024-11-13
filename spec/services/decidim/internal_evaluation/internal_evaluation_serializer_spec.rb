@@ -9,15 +9,18 @@ module Decidim
         described_class.new(internal_evaluation)
       end
 
+      let(:organization) { create(:organization) }
+      let(:scope) { create(:scope, name: { en: "Scope", es: "Alcance" }, organization:) }
+      let(:category) { create(:category, name: { en: "Category", es: "Categoría" }, participatory_space:) }
+      let(:participatory_space) { create(:participatory_process, organization:) }
+      let(:component) { create(:proposal_component, :with_attachments_allowed, participatory_space:) }
       let(:internal_evaluation) { create(:internal_evaluation, body:, internal_state:, proposal:) }
-      let(:proposal) { create(:proposal, title: proposal_title, body: proposal_body, scope:, category:) }
+      let(:proposal) { create(:proposal, title: proposal_title, body: proposal_body, component:, scope:, category:) }
       let(:internal_state) { create(:proposal_state, component: proposal.component, title: state_title) }
       let(:body) { "The body" }
       let(:state_title) { { en: "Accepted", es: "Aceptado" } }
       let(:proposal_title) { { en: "The title", es: "El título" } }
       let(:proposal_body) { { en: "The body", es: "El cuerpo" } }
-      let(:scope) { create(:scope, name: { en: "Scope", es: "Alcance" }) }
-      let(:category) { create(:category, name: { en: "Category", es: "Categoría" }) }
 
       describe "#serialize" do
         let(:serialized) { subject.serialize }
