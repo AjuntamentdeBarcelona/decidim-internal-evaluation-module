@@ -31,24 +31,22 @@ module Decidim
       #
       # Returns an Arel::Relation with the filtered collection.
       def filtered_collection(resource_class, component, user)
-        return @collection if @collection
+        @filtered_collection ||= begin
+          collection = resource_class
+                       .not_hidden
+                       .published
+                       .where(component:)
+                       .where.not(valuation_assignments_count: 0)
 
-        collection = resource_class
-          .not_hidden
-          .published
-          .where(component:)
-          .where.not(valuation_assignments_count: 0)
+          participatory_space = component.participatory_space
+          user_is_valuator = participatory_space.user_roles(:valuator).where(user:).any?
 
-        participatory_space = component.participatory_space
-        user_is_valuator = participatory_space.user_roles(:valuator).where(user:).any?
-
-        @collection = if user_is_valuator
-                        collection.with_valuation_assigned_to(user, participatory_space)
-                      else
-                        collection
-                      end
-
-        @collection
+          if user_is_valuator
+            collection.with_valuation_assigned_to(user, participatory_space)
+          else
+            collection
+          end
+        end
       end
 
       module_function :internal_evaluations_for_resource, :filtered_collection
