@@ -9,6 +9,9 @@ en:
             values:
               "false": Not evaluated
               "true": Evaluated
+    download_your_data:
+      show:
+        internal_evaluations: Internal evaluations
     internal_evaluation:
       admin:
         internal_evaluations:
