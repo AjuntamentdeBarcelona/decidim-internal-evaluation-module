@@ -11,13 +11,16 @@ module Decidim
       # Serializes an internal evaluation
       def serialize
         {
-          id: resource.id,
-          created_at: resource.created_at,
-          status: translated_attribute(resource.internal_state&.title),
-          text: convert_to_text(resource.body),
-          evaluator_name: resource.author.name,
-          proposal_title: translated_attribute(proposal.title),
-          proposal_description: convert_to_text(translated_attribute(proposal.body))
+          id: resource.id || "",
+          created_at: resource.created_at || "",
+          status: resource.internal_state.present? ? translated_attribute(resource.internal_state.title) : "",
+          text: resource.body.present? ? convert_to_text(resource.body) : "",
+          evaluator_name: resource.author.name || "",
+          proposal_id: proposal.id || "",
+          proposal_title: translated_attribute(proposal.title) || "",
+          proposal_description: convert_to_text(translated_attribute(proposal.body)) || "",
+          scope: translated_attribute(proposal.scope&.name) || "",
+          category: translated_attribute(proposal.category&.name) || ""
         }
       end
 
