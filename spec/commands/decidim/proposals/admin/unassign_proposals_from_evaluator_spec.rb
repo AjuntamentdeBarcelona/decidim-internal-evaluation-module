@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Proposals
     module Admin
-      describe UnassignProposalsFromValuator do
+      describe UnassignProposalsFromEvaluator do
         describe "call" do
           let!(:assigned_proposal) { create(:proposal, component: current_component) }
           let!(:unassigned_proposal) { create(:proposal, component: current_component) }
@@ -13,19 +13,19 @@ module Decidim
           let(:space) { current_component.participatory_space }
           let(:organization) { space.organization }
           let(:user) { create(:user, organization:) }
-          let(:valuator) { create(:user, organization:) }
-          let(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user: valuator, participatory_process: space) }
-          let(:valuator_roles) { [valuator_role] }
-          let!(:assignment) { create(:valuation_assignment, proposal: assigned_proposal, valuator_role:) }
-          let!(:internal_evaluation) { create(:internal_evaluation, proposal: assigned_proposal, author: valuator) }
+          let(:evaluator) { create(:user, organization:) }
+          let(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: evaluator, participatory_process: space) }
+          let(:evaluator_roles) { [evaluator_role] }
+          let!(:assignment) { create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:) }
+          let!(:internal_evaluation) { create(:internal_evaluation, proposal: assigned_proposal, author: evaluator) }
 
           let(:form) do
             instance_double(
-              ValuationAssignmentForm,
+              EvaluationAssignmentForm,
               current_user: user,
               current_component:,
               current_organization: current_component.organization,
-              valuator_roles:,
+              evaluator_roles:,
               proposals: [assigned_proposal, unassigned_proposal],
               valid?: valid
             )
@@ -35,16 +35,16 @@ module Decidim
           describe "when the form is valid" do
             let(:valid) { true }
 
-            it "destroys the valuation assignment between the user and the proposal" do
+            it "destroys the evaluation assignment between the user and the proposal" do
               expect do
                 command.call
-              end.to change { ValuationAssignment.where(valuator_role:).count }.from(1).to(0)
+              end.to change { EvaluationAssignment.where(evaluator_role:).count }.from(1).to(0)
             end
 
-            it "destroys the internal evaluations created by the valuator for the proposal" do
+            it "destroys the internal evaluations created by the evaluator for the proposal" do
               expect do
                 command.call
-              end.to change { Decidim::InternalEvaluation::InternalEvaluation.where(author: valuator, proposal: assigned_proposal).count }.from(1).to(0)
+              end.to change { Decidim::InternalEvaluation::InternalEvaluation.where(author: evaluator, proposal: assigned_proposal).count }.from(1).to(0)
             end
 
             it "traces the action", versioning: true do

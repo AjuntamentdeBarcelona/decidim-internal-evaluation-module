@@ -1,10 +1,10 @@
-<% internal_evaluation = valuation_assignment.proposal.internal_evaluations.find { |e| e.decidim_author_id == valuation_assignment.valuator_role.decidim_user_id } %>
+<% internal_evaluation = evaluation_assignment.proposal.internal_evaluations.find { |e| e.decidim_author_id == evaluation_assignment.evaluator_role.decidim_user_id } %>
 <% internal_evaluation = Decidim::InternalEvaluation::Admin::InternalEvaluationPresenter.new(internal_evaluation) if internal_evaluation.present? %>
-<% valuator = present(valuation_assignment.valuator) %>
+<% evaluator = present(evaluation_assignment.evaluator) %>
 
 <tr>
   <td colspan="2">
-    <%= link_to_if(valuator.profile_path.present?, valuator.name, valuator.profile_path, target: :blank, class: "block") %>
+    <%= link_to_if(evaluator.profile_path.present?, evaluator.name, evaluator.profile_path, target: :blank, class: "block") %>
     <%= internal_evaluation.update_date if internal_evaluation.present? %>
   </td>
 
@@ -19,29 +19,29 @@
   </td>
 
   <td class="table-list__actions">
-    <% if valuator == current_user %>
+    <% if evaluator == current_user %>
       <%= with_tooltip(t(".edit_evaluation"), class: "top") do %>
-        <button class="text-secondary" data-dialog-open="<%= "evaluateModal-#{valuation_assignment.id}" %>" data-action="evaluate">
+        <button class="text-secondary" data-dialog-open="<%= "evaluateModal-#{evaluation_assignment.id}" %>" data-action="evaluate">
           <%= icon "pencil-line" %>
         </button>
       <% end %>
 
-      <%= decidim_modal id: "evaluateModal-#{valuation_assignment.id}", class: "evaluate-modal" do %>
+      <%= decidim_modal id: "evaluateModal-#{evaluation_assignment.id}", class: "evaluate-modal" do %>
         <% url = internal_evaluation.present? ? proposal_internal_evaluation_path(proposal, internal_evaluation) : proposal_internal_evaluations_path(proposal) %>
 
         <%= decidim_form_for(internal_evaluation_form, url:, html: { class: "form form-defaults edit_proposal_internal_evaluation" }) do |f| %>
-          <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f, locals: { modal_id: "evaluateModal-#{valuation_assignment.id}" } %>
+          <%= render partial: "/decidim/internal_evaluation/admin/internal_evaluations/form", object: f, locals: { modal_id: "evaluateModal-#{evaluation_assignment.id}" } %>
         <% end %>
       <% end %>
     <% end %>
 
-    <% if allowed_to? :unassign_from_valuator, :proposals, valuator: valuation_assignment.valuator %>
+    <% if allowed_to? :unassign_from_evaluator, :proposals, evaluator: evaluation_assignment.evaluator %>
       <%= icon_link_to(
             "delete-bin-line",
-            valuation_assignment_path(proposal_ids: [proposal.id], valuator_role_ids: [valuation_assignment.valuator_role.id]),
+            evaluation_assignment_path(proposal_ids: [proposal.id], evaluator_role_ids: [evaluation_assignment.evaluator_role.id]),
             t("remove_assignment", scope: "decidim.proposals.admin.proposals.show"),
             method: :delete,
-            data: { confirm: t("remove_assignment_confirmation", scope: "decidim.proposals.admin.proposals.show"), action: "unassign-valuator" },
+            data: { confirm: t("remove_assignment_confirmation", scope: "decidim.proposals.admin.proposals.show"), action: "unassign-evaluator" },
             class: "red-icon"
           ) %>
     <% end %>

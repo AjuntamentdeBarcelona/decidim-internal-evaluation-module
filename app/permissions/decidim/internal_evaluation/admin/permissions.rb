@@ -19,7 +19,7 @@ module Decidim
         private
 
         def can_evaluate_proposal?
-          user_valuator_role.present? && valuator_assigned_to_proposal?
+          user_evaluator_role.present? && evaluator_assigned_to_proposal?
         end
 
         def proposal
@@ -31,14 +31,14 @@ module Decidim
             permission_action.action == :read
         end
 
-        def user_valuator_role
-          @user_valuator_role ||= space.user_roles(:valuator).find_by(user:)
+        def user_evaluator_role
+          @user_evaluator_role ||= space.user_roles(:evaluator).find_by(user:)
         end
 
-        def valuator_assigned_to_proposal?
-          @valuator_assigned_to_proposal ||=
-            Decidim::Proposals::ValuationAssignment
-            .where(proposal:, valuator_role: user_valuator_role)
+        def evaluator_assigned_to_proposal?
+          @evaluator_assigned_to_proposal ||=
+            Decidim::Proposals::EvaluationAssignment
+            .where(proposal:, evaluator_role: user_evaluator_role)
             .any?
         end
       end
