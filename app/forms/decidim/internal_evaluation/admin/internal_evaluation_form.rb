@@ -3,7 +3,7 @@
 module Decidim
   module InternalEvaluation
     module Admin
-      # A form object to be used when valuator users want to evaluate a proposal.
+      # A form object to be used when evaluator users want to evaluate a proposal.
       class InternalEvaluationForm < Decidim::Form
         include TranslatableAttributes
 
