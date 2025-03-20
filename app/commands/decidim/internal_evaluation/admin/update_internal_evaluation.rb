@@ -3,7 +3,7 @@
 module Decidim
   module InternalEvaluation
     module Admin
-      # A command with all the business logic when a valuator evaluates a proposal.
+      # A command with all the business logic when a evaluator evaluates a proposal.
       class UpdateInternalEvaluation < Decidim::Commands::UpdateResource
         def attributes
           super.merge(

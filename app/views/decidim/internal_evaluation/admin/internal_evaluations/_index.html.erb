@@ -7,7 +7,7 @@
   </button>
 
   <div id="panel-internal-evaluations">
-    <span class="block my-4 font-semibold text-gray-2"><%= t(".counter", count: proposal.internal_evaluations.count, total: valuation_assignments.count ) %></span>
+    <span class="block my-4 font-semibold text-gray-2"><%= t(".counter", count: proposal.internal_evaluations.count, total: evaluation_assignments.count ) %></span>
 
     <div class="table-scroll">
       <table class="table-list table-fixed table-list--internal-evaluation">
@@ -29,9 +29,9 @@
         </thead>
         <tbody>
           <%= render(
-            partial: "decidim/internal_evaluation/admin/internal_evaluations/valuation_assignments_evaluations",
-            collection: reordered_valuation_assignments,
-            as: :valuation_assignment
+            partial: "decidim/internal_evaluation/admin/internal_evaluations/evaluation_assignments_evaluations",
+            collection: reordered_evaluation_assignments,
+            as: :evaluation_assignment
           ) %>
         </tbody>
       </table>

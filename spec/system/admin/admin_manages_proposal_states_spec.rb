@@ -18,9 +18,9 @@ describe "Admin manages proposals states" do
       }
     end
     let!(:state) { create(:proposal_state, component: current_component, **state_params) }
-    let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
+    let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user:, participatory_process:) }
     let!(:assigned_proposal) { create(:proposal, component: current_component) }
-    let!(:valuation_assignment) { create(:valuation_assignment, proposal: assigned_proposal, valuator_role:) }
+    let!(:evaluation_assignment) { create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:) }
 
     before do
       click_on "Statuses"

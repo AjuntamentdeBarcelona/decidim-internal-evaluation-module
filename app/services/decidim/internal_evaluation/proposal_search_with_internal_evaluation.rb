@@ -13,7 +13,7 @@ module Decidim
         @evaluated_by_user = params[:evaluated_by_user]
 
         user = params.delete("current_user")
-        user = Decidim::Proposals::ValuationAssignment.find_by(valuator_role_id: params["valuator_role_ids_has"])&.valuator if params["valuator_role_ids_has"].present?
+        user = Decidim::Proposals::EvaluationAssignment.find_by(evaluator_role_id: params["evaluator_role_ids_has"])&.evaluator if params["evaluator_role_ids_has"].present?
 
         if params[:evaluated_by_user] && user
           case params[:evaluated_by_user]

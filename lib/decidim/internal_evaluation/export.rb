@@ -13,8 +13,8 @@ module Decidim
       # Returns an Arel::Relation with all the internal evaluations for that component and resource.
       def internal_evaluations_for_resource(resource_class, component, user)
         filtered_collection(resource_class, component, user).map do |proposal|
-          proposal.valuation_assignments.map do |assignment|
-            author = assignment.valuator_role&.user
+          proposal.evaluation_assignments.map do |assignment|
+            author = assignment.evaluator_role&.user
 
             next if author.blank?
 
@@ -36,13 +36,13 @@ module Decidim
                        .not_hidden
                        .published
                        .where(component:)
-                       .where.not(valuation_assignments_count: 0)
+                       .where.not(evaluation_assignments_count: 0)
 
           participatory_space = component.participatory_space
-          user_is_valuator = participatory_space.user_roles(:valuator).where(user:).any?
+          user_is_evaluator = participatory_space.user_roles(:evaluator).where(user:).any?
 
-          if user_is_valuator
-            collection.with_valuation_assigned_to(user, participatory_space)
+          if user_is_evaluator
+            collection.with_evaluation_assigned_to(user, participatory_space)
           else
             collection
           end
