@@ -5,6 +5,8 @@ module Decidim
     module Admin
       # A command with all the business logic when a valuator evaluates a proposal.
       class CreateInternalEvaluation < Decidim::Commands::CreateResource
+        fetch_form_attributes :body, :internal_state
+
         def attributes
           super.merge(
             body: form.body,
