@@ -2,9 +2,9 @@ PATH
   remote: .
   specs:
     decidim-internal_evaluation (0.0.2)
-      decidim-core (= 0.30.0)
-      decidim-proposals (= 0.30.0)
-      decidim-templates (= 0.30.0)
+      decidim-core (~> 0.30.0)
+      decidim-proposals (~> 0.30.0)
+      decidim-templates (~> 0.30.0)
       deface (~> 1.9)
 
 GEM
