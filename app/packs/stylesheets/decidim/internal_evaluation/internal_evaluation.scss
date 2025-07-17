@@ -2,7 +2,8 @@
 .table-list--internal-evaluation {
   @apply w-full;
 
-  td:nth-child(3), th:nth-child(3) {
+  td:nth-child(3),
+  th:nth-child(3) {
     @apply text-left;
   }
 

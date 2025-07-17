@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     "homepage_uri" => "https://decidim.org",
     "source_code_uri" => "https://github.com/decidim/decidim"
   }
-  s.required_ruby_version = "~> 3.2"
+  s.required_ruby_version = ">= 3.3.4"
 
   s.name = "decidim-internal_evaluation"
   s.summary = "A decidim internal_evaluation module"

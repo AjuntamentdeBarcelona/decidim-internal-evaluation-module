@@ -8,6 +8,7 @@ module Decidim
       include Decidim::TranslationsHelper
       include HtmlToPlainText
 
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       # Serializes an internal evaluation
       def serialize
         {
@@ -23,6 +24,7 @@ module Decidim
           category: translated_attribute(proposal.category&.name) || ""
         }
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       private
 
