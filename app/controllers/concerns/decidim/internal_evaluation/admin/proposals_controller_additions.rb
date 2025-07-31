@@ -9,7 +9,7 @@ module Decidim
         extend ActiveSupport::Concern
 
         included do
-          helper_method :internal_evaluation_form, :valuation_assignments, :internal_evaluations, :internal_evaluations_query, :reordered_valuation_assignments
+          helper_method :internal_evaluation_form, :evaluation_assignments, :internal_evaluations, :internal_evaluations_query, :reordered_evaluation_assignments
 
           delegate :internal_evaluations, to: :proposal
 
@@ -25,18 +25,18 @@ module Decidim
             @internal_evaluation_query ||= internal_evaluations.ransack(ransack_params, search_context: :admin, auth_object: current_user)
           end
 
-          def valuation_assignments
-            @valuation_assignments ||= proposal.valuation_assignments.includes(:valuator_role, proposal: :internal_evaluations)
+          def evaluation_assignments
+            @evaluation_assignments ||= proposal.evaluation_assignments.includes(:evaluator_role, proposal: :internal_evaluations)
           end
 
-          def reordered_valuation_assignments
-            return valuation_assignments if ransack_params.blank?
+          def reordered_evaluation_assignments
+            return evaluation_assignments if ransack_params.blank?
 
-            partial_ordered_assignments = valuation_assignments.to_a.in_order_of(:valuator, internal_evaluations_query.result.map(&:author))
+            partial_ordered_assignments = evaluation_assignments.to_a.in_order_of(:evaluator, internal_evaluations_query.result.map(&:author))
 
-            return valuation_assignments if partial_ordered_assignments.blank?
+            return evaluation_assignments if partial_ordered_assignments.blank?
 
-            partial_ordered_assignments + (valuation_assignments - partial_ordered_assignments)
+            partial_ordered_assignments + (evaluation_assignments - partial_ordered_assignments)
           end
 
           private

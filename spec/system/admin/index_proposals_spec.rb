@@ -12,11 +12,11 @@ describe "Index proposals" do
   end
   let!(:admin) { create(:user, :admin, :confirmed, organization:) }
   let!(:user) { create(:user, organization:) }
-  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
+  let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user:, participatory_process:) }
   let!(:another_user) { create(:user, organization:) }
-  let!(:another_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: another_user, participatory_process:) }
-  let!(:user_valuation_assignment) { create(:valuation_assignment, proposal: assigned_proposal, valuator_role:) }
-  let!(:another_user_valuation_assignment) { create(:valuation_assignment, proposal: assigned_proposal, valuator_role: another_valuator_role) }
+  let!(:another_evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: another_user, participatory_process:) }
+  let!(:user_evaluation_assignment) { create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:) }
+  let!(:another_user_evaluation_assignment) { create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role: another_evaluator_role) }
 
   include Decidim::ComponentPathHelper
 
@@ -29,7 +29,7 @@ describe "Index proposals" do
       end
 
       it "shows a column with zero evaluations count" do
-        expect(page).to have_css("td.valuators-count", text: "0 / 2")
+        expect(page).to have_css("td.evaluators-count", text: "0 / 2")
       end
     end
 
@@ -41,7 +41,7 @@ describe "Index proposals" do
       end
 
       it "shows a column with zero evaluations count" do
-        expect(page).to have_css("td.valuators-count", text: "1 / 2")
+        expect(page).to have_css("td.evaluators-count", text: "1 / 2")
       end
     end
   end
