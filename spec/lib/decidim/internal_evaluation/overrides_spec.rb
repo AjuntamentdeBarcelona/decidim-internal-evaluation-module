@@ -12,7 +12,7 @@ checksums = [
       "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "bde8bbe14eea0c5c5e0539071a10a2b6",
       "/app/controllers/decidim/proposals/admin/proposals_controller.rb" => "08ed9b8ced5e5302e9bf42c0afaa0679",
       "/app/controllers/decidim/proposals/admin/proposal_states_controller.rb" => "cd2d1521734ebf60e9769acbec3d83fa",
-      "/app/commands/decidim/proposals/admin/unassign_proposals_from_valuator.rb" => "377e2ef5c196b4ced4c20b44889e1861"
+      "/app/commands/decidim/proposals/admin/unassign_proposals_from_evaluator.rb" => "377e2ef5c196b4ced4c20b44889e1861"
     }
   }
 ]
