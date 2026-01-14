@@ -31,6 +31,7 @@ describe "Evaluator manages internal evaluations" do
       visit current_path
 
       within "tr", text: translated(assigned_proposal.title) do
+        page.find(".table-list__actions").click
         click_on "Answer proposal"
       end
     end
@@ -74,9 +75,10 @@ describe "Evaluator manages internal evaluations" do
 
             click_on "Save"
           end
+
+          expect(page).to have_content("successfully")
         end.to change(Decidim::InternalEvaluation::InternalEvaluation, :count).by(1)
 
-        expect(page).to have_content("successfully")
         expect(page).to have_content("1 out of 2 evaluations")
       end
     end
@@ -89,6 +91,7 @@ describe "Evaluator manages internal evaluations" do
       visit current_path
 
       within "tr", text: translated(assigned_proposal.title) do
+        page.find(".table-list__actions").click
         click_on "Answer proposal"
       end
     end

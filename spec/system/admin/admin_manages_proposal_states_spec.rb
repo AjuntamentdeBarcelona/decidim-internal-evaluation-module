@@ -28,6 +28,7 @@ describe "Admin manages proposals states" do
 
     it "deletes the proposal state" do
       within "tr", text: translated(state.title) do
+        page.find(".table-list__actions").click
         accept_confirm { click_on "Delete" }
       end
       expect(page).to have_admin_callout("successfully")

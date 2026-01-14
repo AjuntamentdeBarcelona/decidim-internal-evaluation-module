@@ -34,8 +34,8 @@ describe "Admin filters evaluated proposals" do
     context "when admin is not evaluator" do
       it "does not show the evaluation filter" do
         within(".filters__section") do
-          find_link("Filter").hover
-          within ".submenu" do
+          find_link("Filter").click
+          within ".dropdown" do
             expect(page).to have_no_content("Evaluation")
           end
         end
@@ -48,8 +48,8 @@ describe "Admin filters evaluated proposals" do
 
         it "shows the evaluation filter" do
           within(".filters__section") do
-            find_link("Filter").hover
-            within ".submenu" do
+            find_link("Filter").click
+            within ".dropdown" do
               expect(page).to have_content("Evaluation")
             end
           end
@@ -76,8 +76,8 @@ describe "Admin filters evaluated proposals" do
 
       it "shows the evaluation filter" do
         within(".filters__section") do
-          find_link("Filter").hover
-          within ".submenu" do
+          find_link("Filter").click
+          within ".dropdown" do
             expect(page).to have_content("Evaluation")
           end
         end
