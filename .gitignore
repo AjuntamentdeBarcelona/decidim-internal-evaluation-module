@@ -73,3 +73,5 @@ yarn-debug.log*
 development_app/
 spec/decidim_dummy_app/
 .rspec-failures
+
+.rbenv-vars
