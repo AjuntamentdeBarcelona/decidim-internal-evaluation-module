@@ -4,11 +4,12 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "~> 0.30.0"
+DECIDIM_VERSION = "~> 0.31.0"
 
 gem "decidim-internal_evaluation", path: "."
 
 gem "decidim", DECIDIM_VERSION
+gem "decidim-initiatives", DECIDIM_VERSION
 gem "decidim-proposals", DECIDIM_VERSION
 gem "decidim-templates", DECIDIM_VERSION
 

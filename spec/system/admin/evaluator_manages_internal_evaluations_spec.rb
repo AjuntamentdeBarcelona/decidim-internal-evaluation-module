@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Valuator manages internal evaluations" do
+describe "Evaluator manages internal evaluations" do
   let(:manifest_name) { "proposals" }
   let!(:assigned_proposal) { create(:proposal, component: current_component) }
   let!(:unassigned_proposal) { create(:proposal, component: current_component) }
@@ -11,9 +11,9 @@ describe "Valuator manages internal evaluations" do
     decidim_admin_participatory_processes.edit_participatory_process_path(participatory_process)
   end
   let!(:user) { create(:user, organization:) }
-  let!(:valuator_role) { create(:participatory_process_user_role, role: :valuator, user:, participatory_process:) }
+  let!(:evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user:, participatory_process:) }
   let!(:another_user) { create(:user, organization:) }
-  let!(:another_valuator_role) { create(:participatory_process_user_role, role: :valuator, user: another_user, participatory_process:) }
+  let!(:another_evaluator_role) { create(:participatory_process_user_role, role: :evaluator, user: another_user, participatory_process:) }
 
   include Decidim::ComponentPathHelper
 
@@ -22,8 +22,8 @@ describe "Valuator manages internal evaluations" do
   before do
     user.update(admin: false)
 
-    create(:valuation_assignment, proposal: assigned_proposal, valuator_role:)
-    create(:valuation_assignment, proposal: assigned_proposal, valuator_role: another_valuator_role)
+    create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role:)
+    create(:evaluation_assignment, proposal: assigned_proposal, evaluator_role: another_evaluator_role)
   end
 
   context "when in the proposal page" do
@@ -31,6 +31,7 @@ describe "Valuator manages internal evaluations" do
       visit current_path
 
       within "tr", text: translated(assigned_proposal.title) do
+        page.find(".table-list__actions").click
         click_on "Answer proposal"
       end
     end
@@ -74,9 +75,10 @@ describe "Valuator manages internal evaluations" do
 
             click_on "Save"
           end
+
+          expect(page).to have_content("successfully")
         end.to change(Decidim::InternalEvaluation::InternalEvaluation, :count).by(1)
 
-        expect(page).to have_content("successfully")
         expect(page).to have_content("1 out of 2 evaluations")
       end
     end
@@ -89,6 +91,7 @@ describe "Valuator manages internal evaluations" do
       visit current_path
 
       within "tr", text: translated(assigned_proposal.title) do
+        page.find(".table-list__actions").click
         click_on "Answer proposal"
       end
     end

@@ -23,13 +23,13 @@ module Decidim
 
       initializer "decidim_internal_evaluation.filters" do
         Decidim.admin_filter(:proposals) do |filter|
-          user = if ransack_params[:valuator_role_ids_has].present?
-                   Decidim::Proposals::ValuationAssignment.find_by(valuator_role_id: ransack_params[:valuator_role_ids_has])&.valuator
+          user = if ransack_params[:evaluator_role_ids_has].present?
+                   Decidim::Proposals::EvaluationAssignment.find_by(evaluator_role_id: ransack_params[:evaluator_role_ids_has])&.evaluator
                  else
                    current_user
                  end
-          if user.present? && Decidim::Proposals::ValuationAssignment.joins(proposal: :component).where(proposal: { component: current_component }).exists?(
-            valuator_role: current_participatory_space.user_roles("valuator").where(user:)
+          if user.present? && Decidim::Proposals::EvaluationAssignment.joins(proposal: :component).where(proposal: { component: current_component }).exists?(
+            evaluator_role: current_participatory_space.user_roles("evaluator").where(user:)
           )
             filter.add_filters(:evaluated_by_user)
             filter.add_filters_with_values(evaluated_by_user: %w(true false))
@@ -49,9 +49,9 @@ module Decidim
         end
       end
 
-      initializer "decidim_internal_evaluation.unassign_proposals_from_valuators_overrides" do
+      initializer "decidim_internal_evaluation.unassign_proposals_from_evaluators_overrides" do
         config.to_prepare do
-          Decidim::Proposals::Admin::UnassignProposalsFromValuator.include(Decidim::InternalEvaluation::Admin::UnassignProposalsFromValuatorsOverrides)
+          Decidim::Proposals::Admin::UnassignProposalsFromEvaluator.include(Decidim::InternalEvaluation::Admin::UnassignProposalsFromEvaluatorsOverrides)
         end
       end
 

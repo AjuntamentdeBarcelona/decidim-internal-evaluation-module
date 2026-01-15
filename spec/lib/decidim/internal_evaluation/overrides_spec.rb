@@ -8,11 +8,11 @@ checksums = [
   {
     package: "decidim-proposals",
     files: {
-      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "4fdf708691596e6e52a6aa427303b0a6",
-      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "bde8bbe14eea0c5c5e0539071a10a2b6",
-      "/app/controllers/decidim/proposals/admin/proposals_controller.rb" => "08ed9b8ced5e5302e9bf42c0afaa0679",
-      "/app/controllers/decidim/proposals/admin/proposal_states_controller.rb" => "cd2d1521734ebf60e9769acbec3d83fa",
-      "/app/commands/decidim/proposals/admin/unassign_proposals_from_valuator.rb" => "377e2ef5c196b4ced4c20b44889e1861"
+      "/app/views/decidim/proposals/admin/proposals/_proposal-tr.html.erb" => "608af89f7bfa800fe2e3c853f8e2ace0",
+      "/app/views/decidim/proposals/admin/proposals/show.html.erb" => "541d1f188e12c6c6ccf18d8908165d81",
+      "/app/controllers/decidim/proposals/admin/proposals_controller.rb" => "e4c0f7d53474d75a9f9a091970995abb",
+      "/app/controllers/decidim/proposals/admin/proposal_states_controller.rb" => "46d227d4b80c177ee4bf50eba003d008",
+      "/app/commands/decidim/proposals/admin/unassign_proposals_from_evaluator.rb" => "8dc24ee1ae681b57c475e873f5d0347f"
     }
   }
 ]

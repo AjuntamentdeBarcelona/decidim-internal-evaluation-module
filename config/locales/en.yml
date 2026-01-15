@@ -33,7 +33,7 @@ en:
           update:
             error: "There was a problem updating the internal evaluation: %{message}"
             success: Internal evaluation successfully updated.
-          valuation_assignments_evaluations:
+          evaluation_assignments_evaluations:
             edit_evaluation: Edit evaluation
     proposals:
       admin:
@@ -42,4 +42,4 @@ en:
       models:
         proposal:
           fields:
-            valuators: Evaluation status
+            evaluators: Evaluation status
