@@ -5,7 +5,7 @@
 <tr>
   <td colspan="2">
     <%= link_to_if(evaluator.profile_path.present?, evaluator.name, evaluator.profile_path, target: :blank, class: "block") %>
-    <%= internal_evaluation.update_date if internal_evaluation.present? %>
+    <%= internal_evaluation&.update_date %>
   </td>
 
   <td>

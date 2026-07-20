@@ -22,7 +22,9 @@ describe "Overriden files", type: :view do
     spec = Gem::Specification.find_by_name(item[:package])
     item[:files].each do |file, signature|
       it "#{spec.gem_dir}#{file} matches checksum" do
-        expect(md5("#{spec.gem_dir}#{file}")).to eq(signature)
+        gem_dir = Gem::Specification.find_by_name(item[:package]).gem_dir
+
+        expect(md5("#{gem_dir}#{file}")).to eq(signature)
       end
     end
   end

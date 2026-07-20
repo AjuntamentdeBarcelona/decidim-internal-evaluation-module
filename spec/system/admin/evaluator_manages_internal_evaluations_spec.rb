@@ -76,7 +76,7 @@ describe "Evaluator manages internal evaluations" do
             click_on "Save"
           end
 
-          expect(page).to have_content("successfully")
+          expect(page).to have_content("Internal evaluation successfully created.")
         end.to change(Decidim::InternalEvaluation::InternalEvaluation, :count).by(1)
 
         expect(page).to have_content("1 out of 2 evaluations")
@@ -124,7 +124,7 @@ describe "Evaluator manages internal evaluations" do
         end
       end.not_to change(Decidim::InternalEvaluation::InternalEvaluation, :count)
 
-      expect(page).to have_content("successfully")
+      expect(page).to have_content("Internal evaluation successfully updated.")
       evaluation.reload
 
       expect(evaluation.internal_state.token).to eq("accepted")

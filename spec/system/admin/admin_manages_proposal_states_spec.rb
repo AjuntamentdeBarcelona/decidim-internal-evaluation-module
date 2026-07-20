@@ -31,7 +31,7 @@ describe "Admin manages proposals states" do
         page.find(".table-list__actions").click
         accept_confirm { click_on "Delete" }
       end
-      expect(page).to have_admin_callout("successfully")
+      expect(page).to have_admin_callout("Status deleted successfully")
 
       state = Decidim::Proposals::ProposalState.find_by(token: "editable")
 
